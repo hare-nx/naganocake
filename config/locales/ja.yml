@@ -1,0 +1,18 @@
+ja:
+  enums:
+    order:
+      payment:
+        credit: "クレジットカード"
+        bank: "銀行振込"
+      status:
+        stand_by: "入金待ち"
+        confirmation: "入金確認"
+        production: "製作中"
+        preparation: "発送準備中"
+        completion: "発送済み"
+    order_detail:
+      status:
+        not_startable: "着手不可"
+        stand_by: "製作待ち"
+        production: "製作中"
+        completion: "製作完了"
