@@ -62,3 +62,5 @@ gem "refile-mini_magick"
 
 gem "enum_help"
 
+gem 'kaminari', '~>1.2.1'
+
