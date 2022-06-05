@@ -24,17 +24,23 @@ Rails.application.routes.draw do
     root to: "homes#top"
     get "about" => "homes#about"
     resources :items, only: [:index, :show]
-    resource :customers, only: [:show, :edit, :update]
-    get "customers/unsubscribe"
-    patch "customers/withdraw"
+    resource :customers, only: [:show, :edit, :update] do
+      collection do
+        get "unsubscribe"
+        patch "withdraw"
+      end
+    end
     resources :cart_items, only: [:index, :update, :destroy, :create] do
       collection do
         delete "destroy_all"
       end
     end
-    resources :orders, only: [:new, :create, :index, :show]
-    post "orders/confirm"
-    get "orders/complete"
+    resources :orders, only: [:new, :create, :index, :show] do
+      collection do
+        post "confirm"
+        get "complete"
+      end
+    end
     resources :addresses, only: [:index, :edit, :create, :update, :destroy]
   end
 

@@ -5,4 +5,12 @@ class Order < ApplicationRecord
 
   has_many :order_details
   belongs_to :customer
+
+  def total_amount
+    sum=0
+    order_details.each do |order_detail|
+      sum+=order_detail.amount
+    end
+    return sum
+  end
 end
