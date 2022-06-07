@@ -1,26 +1,46 @@
-<h1>商品新規登録</h1>
+<div class="container-fluid p-5">
+  <div class="row h5 pb-4">
+    <div class="text-center col-auto bg-light offset-sm-2 h-25">新規商品登録</div>
+  </div>
 <%= form_with model: @item, url: admin_items_path do |f| %>
-  <%= f.label "商品画像" %>
-  <%= f.file_field :image_id, accept: "image/*" %><br>
-
-  <%= f.label "商品名" %>
-  <%= f.text_field :name, placeholder: "商品名" %><br>
-
-  <%= f.label "商品説明" %>
-  <%= f.text_area :introduction, placeholder: "ここに説明文を記述します" %><br>
-
-  <%= f.label "ジャンル" %>
-  <%= f.collection_select :genre_id, Genre.all, :id, :name, include_blank: "--選択してください--" %><br>
-
-  <%= f.label "税抜価格" %>
-  <%= f.text_field :price, placeholder: "1000" %>円<br>
-
-  <%= f.label "販売ステータス" %>
-  <%= f.radio_button :is_active, :true %>
-  <%= f.label :is_active, "販売中", value: true, :checked => true %>
-  <%= f.radio_button :is_active, :false %>
-  <%= f.label :is_active, "販売停止中", value: false %><br>
-
-  <%= f.submit "新規登録" %>
-<% end %>
-
+   <div class="row justify-content-center mb-3">
+    <label class="col-sm-2">商品画像</label>
+    <div class="col-sm-3"><%= f.file_field :image_id, accept: "image/*" %></div>
+  </div>
+  <div class="row justify-content-center mb-3">
+    <label class="col-sm-2">商品名</label>
+    <div class="col-sm-3 pr-0"><%= f.text_field :name, placeholder: "商品名", class: "w-100" %></div>
+  </div>
+  <div class="row justify-content-center mb-3">
+    <label class="col-sm-2 align-self-center">商品説明</label>
+    <div class="col-sm-3 pr-0"><%= f.text_area :introduction, placeholder: "ここに説明文を記述します", class: "w-100" %></div>
+  </div>
+  <div class="row justify-content-center mb-3">
+    <label class="col-sm-2">ジャンル</label>
+    <div class="col-sm-3 pr-0"><%= f.collection_select :genre_id, Genre.all, :id, :name, include_blank: "--選択してください--", class: "w-100" %></div>
+  </div>
+  <div class="row justify-content-center mb-3">
+    <label class="col-sm-2 ml-5">税抜価格</label>
+    <div class="col-sm-3 pr-0"><%= f.text_field :price, placeholder: "1000", class: "w-100" %></div>
+    <div class="col-auto nogutters">円</div>
+  </div>
+  <div class="row justify-content-center mb-3">
+    <label class="col-sm-2">販売ステータス</label>
+      <div class="col-sm-3">
+        <div class="row">
+          <div class="col-auto">
+            <%= f.radio_button :is_active, :true %>
+            <%= f.label :is_active, "販売中", value: true %>
+          </div>
+          <div class="col-auto">
+            <%= f.radio_button :is_active, :false %>
+            <%= f.label :is_active, "販売停止中", value: false %>
+          </div>
+        </div>
+    </div>
+  </div>
+  <div class="row justify-content-center">
+    <%= f.submit "新規登録", class: "btn btn-success" %>
+  </div>
+  <% end %>
+</div>
