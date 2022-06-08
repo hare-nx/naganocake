@@ -1,7 +1,9 @@
+<%= image_tag @item.get_image_id, size: "400x300" %>
+
 <h1><%= @item.name %></h1>
 <p><%= @item.introduction %></p>
 
-<h3>￥<%= @item.with_tax_price %></h3><p>(税込)</p>
+<p>￥<%= @item.with_tax_price.to_s(:delimited) %>(税込)</p>
 
 <div>
   <%= form_with model: @cart_item, url: cart_items_path do |f| %>

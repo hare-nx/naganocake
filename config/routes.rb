@@ -24,7 +24,7 @@ Rails.application.routes.draw do
     root to: "homes#top"
     get "about" => "homes#about"
     resources :items, only: [:index, :show]
-    resource :customers, only: [:show, :edit, :update] do
+    resource :customers, only: [:show, :update] do
       collection do
         get "unsubscribe"
         patch "withdraw"

@@ -3,7 +3,7 @@
     <div class="text-center col-auto bg-light offset-sm-2 h-25"><%= @customer.last_name %><%= @customer.first_name %>さんの会員情報編集</div>
   </div>
   <div class="row">
-    <%= form_with model: @customer, url: admin_customer_path(@customer), class: "w-100" do |f| %>
+    <%= form_with model: @customer, url: admin_customer_path(@customer.id), class: "w-100" do |f| %>
     <table class="table table-borderless col-sm-7 offset-sm-2">
       <tr>
         <td style="width:25%">会員ID</td>
