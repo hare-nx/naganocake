@@ -10,19 +10,16 @@
       </tr>
       <tr>
         <td>
-
-          <%= cart_item.item.name %>
+          <%= image_tag cart_item.item.get_image_id, size: "100x60" %><%= cart_item.item.name %>
         </td>
         <td>
-
-          <%= cart_item.item.with_tax_price %>
+          <%= cart_item.item.with_tax_price.to_s(:delimited) %>
         </td>
         <td>
-
           <%= cart_item.amount %>
         </td>
         <td>
-          <%= cart_item.subtotal %>
+          <%= cart_item.subtotal.to_s(:delimited) %>
         </td>
       </tr>
     </table>
@@ -41,13 +38,13 @@
       </tr>
       <tr>
         <th>商品合計</th>
-        <td><%= @total %></td>
+        <td><%= @total.to_s(:delimited) %></td>
       </tr>
       <tr>
         <th>請求金額</th>
         <td>
           <%= f.hidden_field :total_price, :value => @total+800 %>
-          <%= @total+800 %>
+          <%= (@total+800).to_s(:delimited) %>
         </td>
       </tr>
 

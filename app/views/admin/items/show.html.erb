@@ -3,14 +3,14 @@
     <div class="text-center col-auto bg-light offset-sm-2 h-25">商品詳細</div>
   </div>
   <div class="row mt-5">
-    <div class="col-sm-4 offset-sm-1 col-11 mb-2">
-      <%= image_tag @item.image_id, class: "w-100 h-auto" %>
+    <div class="col-sm-auto offset-sm-1 mb-2">
+      <%= image_tag @item.image_id, size: "300x195", style: "object-fit:cover" %>
     </div>
-    <div class="col-sm-5 col-11">
+    <div class="col-sm-5 col-11 ml-4">
       <table class="table table-borderless">
         <tr>
-          <td>商品名</td>
-          <td><%= @item.name %></td>
+          <td style="width:30%">商品名</td>
+          <td style="width:70%"><%= @item.name %></td>
         </tr>
         <tr>
           <td>商品説明</td>
@@ -36,6 +36,6 @@
     </div>
   </div>
   <div class="row justify-content-center">
-    <%= link_to "編集する", edit_admin_item_path(@item), class: "btn btn-success" %>
+    <%= link_to "編集する", edit_admin_item_path(@item), class: "btn btn-success px-4" %>
   </div>
 </div>

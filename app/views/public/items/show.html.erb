@@ -1,14 +1,32 @@
-<%= image_tag @item.get_image_id, size: "400x300" %>
+<div class="container py-5">
+  <div class="row flex-md-nowrap mb-5">
+    <div class="col-sm-3 mb-5">
+    <%= render 'public/items/genre', genres: @genres %>
+    </div>
 
-<h1><%= @item.name %></h1>
-<p><%= @item.introduction %></p>
+    <div class="col-sm-auto ml-3 col-11 flex-sm-fill">
+      <div class="row flex-md-nowrap">
+        <div class="col-sm-auto mb-2">
+          <%= image_tag @item.image_id, size: "300x195", style: "object-fit:cover" %>
+        </div>
+        <div class="col-sm-auto ml-3 flex-sm-fill">
+          <div class="row h3"><%= @item.name %></div>
+          <div class="row mb-5"><%= @item.introduction %></div>
+          <div class="row mb-3">
+            <div class="col-auto pl-0 h4">￥<%= @item.with_tax_price.to_s(:delimited) %></div>
+            <div class="col-auto align-self-center pl-0">(税込)</div>
+          </div>
 
-<p>￥<%= @item.with_tax_price.to_s(:delimited) %>(税込)</p>
-
-<div>
-  <%= form_with model: @cart_item, url: cart_items_path do |f| %>
-    <%= f.hidden_field :item_id, :value => @item.id %>
-    <%= f.select :amount, [1,2,3,4,5,6,7,8,9,10] %>
-    <%= f.submit "カートに入れる" %>
-  <% end %>
+          <%= form_with model: @cart_item, url: cart_items_path do |f| %>
+            <%= f.hidden_field :item_id, :value => @item.id %>
+            <div class="row align-items-center pl-0">
+              <div class="col-auto pl-0"><%= f.select :amount, [1,2,3,4,5,6,7,8,9,10] %></div>
+              <div class="col-auto"><%= f.submit "カートに入れる", class: "btn btn-success" %></div>
+            </div>
+          <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

@@ -13,4 +13,12 @@ class Order < ApplicationRecord
     end
     return sum
   end
+
+  def item_total_price
+    sum=0
+    order_details.each do |order_detail|
+      sum+=order_detail.subtotal
+    end
+    return sum
+  end
 end

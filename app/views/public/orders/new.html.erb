@@ -7,7 +7,7 @@
   <%= f.label :payment, Order.payments_i18n[:bank] %>
 
 <h3>お届け先</h3>
-  <%= f.radio_button :select_address, 0 %>
+  <%= f.radio_button :select_address, 0, checked: true %>
   <%= f.label :select_address, "ご自身の住所" %>
   <p>
     〒<%= current_customer.postal_code.insert(3, "-") %> <%= current_customer.address %><br>

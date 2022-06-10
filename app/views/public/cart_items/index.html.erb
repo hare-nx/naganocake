@@ -10,7 +10,7 @@
     <td></td>
   </tr>
   <tr>
-    <td><%= image_tag cart_item.item.image_id %><%= cart_item.item.name %></td>
+    <td><%= image_tag cart_item.item.get_image_id, size: "100x60" %><%= cart_item.item.name %></td>
     <td><%= cart_item.item.with_tax_price %></td>
     <td>
       <%= form_with model: cart_item, url: cart_item_path(cart_item.id) do |f| %>
