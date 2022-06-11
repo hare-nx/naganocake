@@ -1,69 +1,84 @@
-<h1>注文情報確認</h1>
-
-  <% @cart_items.each do |cart_item| %>
-    <table>
+<div class="container-fluid p-5">
+  <%=form_with model: @order, url: orders_path do |f| %>
+  <div class="row h5 pb-4">
+    <div class="text-center col-auto bg-light offset-sm-2 h-25">注文情報確認</div>
+  </div>
+  <div class="row">
+    <table class="table table-bordered col-sm-7 offset-sm-1">
       <tr>
-        <th>商品名</th>
-        <th>単価(税込)</th>
-        <th>数量</th>
-        <th>小計</th>
+        <thead class="thead-light">
+          <th class="font-weight-normal">商品名</th>
+          <th class="font-weight-normal">単価(税込)</th>
+          <th class="font-weight-normal">数量</th>
+          <th class="font-weight-normal">小計</th>
+        </thead>
       </tr>
+      <% @cart_items.each do |cart_item| %>
       <tr>
-        <td>
-          <%= image_tag cart_item.item.get_image_id, size: "100x60" %><%= cart_item.item.name %>
+        <td class="py-1">
+          <%= image_tag cart_item.item.get_image_id, size: "70x45", style: "object-fit:cover", class: "mr-3" %><%= cart_item.item.name %>
         </td>
-        <td>
+        <td class="align-middle">
           <%= cart_item.item.with_tax_price.to_s(:delimited) %>
         </td>
-        <td>
+        <td class="align-middle">
           <%= cart_item.amount %>
         </td>
-        <td>
+        <td class="align-middle">
           <%= cart_item.subtotal.to_s(:delimited) %>
         </td>
       </tr>
+      <% @total += cart_item.subtotal %>
+      <% end %>
     </table>
-    <% @total += cart_item.subtotal %>
+
+    <table class="table table-bordered col-sm-2 ml-auto">
+      <thead class="thead-light">
+        <tr>
+          <th class="font-weight-normal" style="width:50%">送料</th>
+          <td style="width:50%">
+            <%= f.hidden_field :postage, :value => 800 %>
+            800
+          </td>
+        </tr>
+        <tr>
+          <th class="font-weight-normal">商品合計</th>
+          <td><%= @total.to_s(:delimited) %></td>
+        </tr>
+        <tr>
+          <th class="font-weight-normal">請求金額</th>
+          <td>
+            <%= f.hidden_field :total_price, :value => @total+800 %>
+            <%= (@total+800).to_s(:delimited) %>
+          </td>
+        </tr>
+      </thead>
+    </table>
+    <div class="col-sm-1"></div>
+  </div>
+
+  <div class="row mt-4 mb-5">
+    <div class="col offset-sm-1">
+      <div class="row mb-3">
+        <div class="col-auto h5 font-weight-bold">支払方法</div>
+        <div class="col-auto">
+          <%= f.hidden_field :payment, :value => params[:order][:payment] %>
+          <%= Order.payments_i18n[@order.payment] %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-auto h5 font-weight-bold">お届け先</div>
+          <%= f.hidden_field :postal_code, :value => @order.postal_code %>
+          <%= f.hidden_field :address, :value => @order.address %>
+          <%= f.hidden_field :name, :value => @order.name %>
+        <div class="col-auto">
+            〒<%= @order.postal_code.insert(3, "-") %> <%= @order.address %><br>
+            <%= @order.name %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row justify-content-center"><%= f.submit "注文を確定する", class: "btn btn-success px-3" %></div>
   <% end %>
-
-
-    <table>
-      <%=form_with model: @order, url: orders_path do |f| %>
-      <tr>
-        <th>送料</th>
-        <td>
-          <%= f.hidden_field :postage, :value => 800 %>
-          800
-        </td>
-      </tr>
-      <tr>
-        <th>商品合計</th>
-        <td><%= @total.to_s(:delimited) %></td>
-      </tr>
-      <tr>
-        <th>請求金額</th>
-        <td>
-          <%= f.hidden_field :total_price, :value => @total+800 %>
-          <%= (@total+800).to_s(:delimited) %>
-        </td>
-      </tr>
-
-    </table>
-
-
-  <h4>支払方法</h4>
-  <%= f.hidden_field :payment, :value => params[:order][:payment] %>
-  <%= Order.payments_i18n[@order.payment] %>
-
-  <h4>お届け先</h4>
-  <%= f.hidden_field :postal_code, :value => @order.postal_code %>
-  <%= f.hidden_field :address, :value => @order.address %>
-  <%= f.hidden_field :name, :value => @order.name %>
-  <p>
-    〒<%= @order.postal_code.insert(3, "-") %> <%= @order.address %><br>
-    <%= @order.name %>
-  </p>
-
-  <%= f.submit "注文を確定する" %>
-
-<% end %>
+</div>

@@ -1,20 +1,27 @@
-<h1>配送先編集</h1>
-
-<%= form_with model: @address do |f| %>
-<table class="table table-borderless">
-  <tr>
-    <td>郵便番号(ハイフンなし)</td>
-    <td><%= f.text_field :postal_code %></td>
-  </tr>
-  <tr>
-    <td>住所</td>
-    <td colspan="2"><%= f.text_field :address %></td>
-  </tr>
-  <tr>
-    <td>宛名</td>
-    <td><%= f.text_field :name %></td>
-    <td></td>
-    <td><%= f.submit "変更内容を保存" %></td>
-  </tr>
-</table>
-<% end %>
+<div class="container-fluid p-5">
+  <div class="row h5 pb-4">
+    <div class="text-center col-auto bg-light offset-sm-2 h-25">配送先編集</div>
+  </div>
+  <div class="row mb-5">
+    <%= form_with model: @address, class: "w-100" do |f| %>
+    <table class="table table-borderless col-sm-9 offset-sm-1">
+      <tr>
+        <td class="pr-0" style="width:25%">郵便番号(ハイフンなし)</td>
+        <td style="width:25%"><%= f.text_field :postal_code, placeholder: "0000000" %></td>
+        <td style="width:35%"></td>
+        <td style="width:15%"></td>
+      </tr>
+      <tr>
+        <td>住所</td>
+        <td class="pr-0" colspan="2"><%= f.text_field :address, placeholder: "東京都渋谷区代々木神園町0-0", class: "w-100" %></td>
+      </tr>
+      <tr>
+        <td>宛名</td>
+        <td><%= f.text_field :name, placeholder: "令和道子" %></td>
+        <td></td>
+        <td class="px-0"><%= f.submit "変更内容を保存", class: "btn btn-success w-100 btn-sm" %></td>
+      </tr>
+    </table>
+    <% end %>
+  </div>
+</div>
