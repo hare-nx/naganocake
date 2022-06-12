@@ -11,6 +11,6 @@
   </div>
   <div class="row justify-content-center mb-2">
     <div class="col-2 mr-1"><%= link_to "退会しない", customers_path, class: "btn btn-success w-100" %></div>
-    <div class="col-2 ml-1"><%= link_to "退会する", withdraw_customers_path, method: :patch, class: "btn btn-danger w-100" %></div>
+    <div class="col-2 ml-1"><%= link_to "退会する", withdraw_customers_path, method: :patch, data: { confirm: '退会します' }, class: "btn btn-danger w-100" %></div>
   </div>
 </div>
